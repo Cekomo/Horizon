@@ -9,7 +9,7 @@ namespace Player
         private MovementDirections movementDirections;
         
         [Range(1f, 10f)] [SerializeField] private float moveSpeed = 1f;
-        [Range(1f, 10f)] [SerializeField] private float jumpForce = 1f;
+        [Range(1f, 20f)] [SerializeField] private float jumpForce = 1f;
         private Rigidbody _rbPlayer;
         
         private Vector3 moveDirection;
@@ -33,8 +33,6 @@ namespace Player
 
             if (Input.GetKeyDown(KeyCode.Space))
                 _isJumpAvailable = true;
-            
-            print(IsGrounded());
         }
 
         private void FixedUpdate()
