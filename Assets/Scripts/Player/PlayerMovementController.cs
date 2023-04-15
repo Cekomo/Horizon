@@ -3,14 +3,19 @@ using UnityEngine;
 
 namespace Player
 {
-
     public class PlayerMovementController : MonoBehaviour
     {
+        public Animator PlayerAnimator;
+        
         private MovementDirections movementDirections;
         
         [Range(1f, 10f)] [SerializeField] private float moveSpeed = 1f;
         [Range(1f, 20f)] [SerializeField] private float jumpForce = 1f;
         private Rigidbody _rbPlayer;
+        
+        private static readonly int JumpTrigger = Animator.StringToHash("Jump");
+        private static readonly int IsRunning = Animator.StringToHash("IsRunning");
+        private static readonly int IsGrounded = Animator.StringToHash("IsGrounded");
         
         private Vector3 moveDirection;
 
@@ -30,6 +35,9 @@ namespace Player
         {
             X_movementUnitVector = Input.GetAxis("Horizontal");
             Z_movementUnitVector = Input.GetAxis("Vertical");
+            
+            PlayerAnimator.SetBool(IsRunning, Mathf.Abs(X_movementUnitVector + Z_movementUnitVector) > 0.1f);
+            PlayerAnimator.SetBool(IsGrounded, IsPlayerGrounded());
 
             if (Input.GetKeyDown(KeyCode.Space))
                 _isJumpAvailable = true;
@@ -41,18 +49,22 @@ namespace Player
                 Z_movementUnitVector * moveSpeed);
             _rbPlayer.velocity = currentVelocity;
 
-            if (_isJumpAvailable && IsGrounded())
+            if (_isJumpAvailable && IsPlayerGrounded())
             {
+                PlayerAnimator.SetTrigger(JumpTrigger);
+                PlayerAnimator.SetBool(IsGrounded, false);
                 _rbPlayer.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 _isJumpAvailable = false;
             }
         }
 
-        private bool IsGrounded()
+        private bool IsPlayerGrounded()
         {
             // RaycastHit hit;
-            return Physics.Raycast(transform.position, Vector3.down, /*out hit,*/ 
+            var isGrounded = Physics.Raycast(transform.position, Vector3.down, /*out hit,*/
                 _groundCheckDistance, groundMask);
+            PlayerAnimator.SetBool(IsGrounded, isGrounded);
+            return isGrounded;
         }
     }
 }

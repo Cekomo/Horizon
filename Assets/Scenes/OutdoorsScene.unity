@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2158.6924, g: 2263.3691, b: 3286.8047, a: 1}
+  m_IndirectSpecularColor: {r: 2161.8057, g: 2265.746, b: 3288.9258, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -219,7 +219,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &157207112
 GameObject:
@@ -534,7 +534,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &338582258
 Rigidbody:
@@ -632,8 +632,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1404d1d90bca0e149b4112b4fc66bd68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  jumpForce: 10
+  PlayerAnimator: {fileID: 625726288}
+  moveSpeed: 4
+  jumpForce: 4
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -646,12 +647,12 @@ Transform:
   m_GameObject: {fileID: 625726284}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6578920976153770675}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &625726287
 Rigidbody:
@@ -678,8 +679,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 625726284}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 074e753a60b1dce4e871b757053fafda, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 356ddf08594f99441a89e1fc6ce5509a, type: 3}
+  m_Controller: {fileID: 9100000, guid: 13cf3c2afacfce54fb2cc6cf1978518a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -748,7 +749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 5, z: -5}
+  m_FollowOffset: {x: 0, y: 2.8, z: -8}
   m_XDamping: 0.5
   m_YDamping: 0.5
   m_ZDamping: 0.5
@@ -914,15 +915,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823688464}
-  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 5, z: -5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.8, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 726363214}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1823688468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1175,27 +1176,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &6490229038768587703
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6576510305592456567}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: ea3c190656c1be74bba0bd65a3905278, type: 3}
-  m_Controller: {fileID: 9100000, guid: 074e753a60b1dce4e871b757053fafda, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!137 &6531761893365457693
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -6774,7 +6754,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6578920976153770675}
-  - component: {fileID: 6490229038768587703}
   m_Layer: 0
   m_Name: CrusaderTank
   m_TagString: Untagged
