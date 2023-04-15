@@ -24,7 +24,8 @@ namespace Player
         private bool _isJumpAvailable;
 
         public LayerMask groundMask;
-        private float _groundCheckDistance = 0.5f;
+        // [Range(0.05f, 3f)] [SerializeField] 
+        private float _groundCheckDistance = 0.1f;
 
         private void Start()
         {
@@ -35,8 +36,9 @@ namespace Player
         {
             X_movementUnitVector = Input.GetAxis("Horizontal");
             Z_movementUnitVector = Input.GetAxis("Vertical");
-            
-            PlayerAnimator.SetBool(IsRunning, Mathf.Abs(X_movementUnitVector + Z_movementUnitVector) > 0.1f);
+
+            var isPlayerMoving = Mathf.Abs(X_movementUnitVector) > 0.1f || Mathf.Abs(Z_movementUnitVector) > 0.1f;
+            PlayerAnimator.SetBool(IsRunning, isPlayerMoving);
             PlayerAnimator.SetBool(IsGrounded, IsPlayerGrounded());
 
             if (Input.GetKeyDown(KeyCode.Space))
