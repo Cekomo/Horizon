@@ -14,7 +14,8 @@ namespace Player
         private Rigidbody _rbPlayer;
         
         private static readonly int JumpTrigger = Animator.StringToHash("Jump");
-        private static readonly int IsRunning = Animator.StringToHash("IsRunning");
+        private static readonly int IsRunningForward = Animator.StringToHash("IsRunningForward");
+        private static readonly int IsRunningSide = Animator.StringToHash("IsRunningSide");
         private static readonly int IsGrounded = Animator.StringToHash("IsGrounded");
         
         private Vector3 moveDirection;
@@ -36,9 +37,9 @@ namespace Player
         {
             X_movementUnitVector = Input.GetAxis("Horizontal");
             Z_movementUnitVector = Input.GetAxis("Vertical");
-
-            var isPlayerMoving = Mathf.Abs(X_movementUnitVector) > 0.1f || Mathf.Abs(Z_movementUnitVector) > 0.1f;
-            PlayerAnimator.SetBool(IsRunning, isPlayerMoving);
+            
+            PlayerAnimator.SetBool(IsRunningForward, Mathf.Abs(Z_movementUnitVector) > 0.1f);
+            PlayerAnimator.SetBool(IsRunningSide, Mathf.Abs(X_movementUnitVector) > 0.1f);
             PlayerAnimator.SetBool(IsGrounded, IsPlayerGrounded());
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -47,7 +48,7 @@ namespace Player
 
         private void FixedUpdate()
         {
-            var currentVelocity = new Vector3(X_movementUnitVector * moveSpeed, _rbPlayer.velocity.y,
+            var currentVelocity = new Vector3(X_movementUnitVector * moveSpeed / 2, _rbPlayer.velocity.y,
                 Z_movementUnitVector * moveSpeed);
             _rbPlayer.velocity = currentVelocity;
 
