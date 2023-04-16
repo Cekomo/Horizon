@@ -48,8 +48,8 @@ namespace Player
 
         private void FixedUpdate()
         {
-            var currentVelocity = new Vector3(X_movementUnitVector * moveSpeed / 2, _rbPlayer.velocity.y,
-                Z_movementUnitVector * moveSpeed);
+            var currentVelocity = (X_movementUnitVector * transform.right + Z_movementUnitVector *
+                transform.forward) * moveSpeed;
             _rbPlayer.velocity = currentVelocity;
 
             if (_isJumpAvailable && IsPlayerGrounded())
@@ -69,5 +69,11 @@ namespace Player
             PlayerAnimator.SetBool(IsGrounded, isGrounded);
             return isGrounded;
         }
+        
+        private float GetRotationOffset()
+        {
+            return Quaternion.Angle(Quaternion.identity, transform.rotation);
+        }
+
     }
 }
