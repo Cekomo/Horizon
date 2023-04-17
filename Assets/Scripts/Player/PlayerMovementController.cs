@@ -4,7 +4,7 @@ namespace Player
 {
     public class PlayerMovementController : MonoBehaviour
     {
-        public Animator PlayerAnimator;
+        [SerializeField] private Animator PlayerAnimator;
         
         private MovementDirections movementDirections;
         
@@ -17,8 +17,9 @@ namespace Player
         private static readonly int IsRunningSide = Animator.StringToHash("IsRunningSide");
         private static readonly int IsGrounded = Animator.StringToHash("IsGrounded");
         
+        public static bool IsPlayerMovable { get; set; }
+        
         private Vector3 moveDirection;
-
         private float X_movementUnitVector;
         private float Z_movementUnitVector;
         private bool _isJumpAvailable;
@@ -29,6 +30,7 @@ namespace Player
 
         private void Start()
         {
+            IsPlayerMovable = true;
             _rbPlayer = GetComponent<Rigidbody>();
         }
 
@@ -47,6 +49,8 @@ namespace Player
 
         private void FixedUpdate()
         {
+            if (!IsPlayerMovable) return;
+            
             var pTransform = transform;
             var currentVelocity = (X_movementUnitVector / 3 * pTransform.right + Z_movementUnitVector *
                 pTransform.forward) * moveSpeed;
