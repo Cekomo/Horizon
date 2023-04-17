@@ -8,6 +8,8 @@ namespace Player
         
         private void Update()
         {
+            if (!Input.GetMouseButton(1)) return;
+            
             RotatePlayerHorizontally();
         }
 
@@ -17,5 +19,4 @@ namespace Player
             transform.Rotate(Vector3.up, horizontalRotation);
         }
     }
-
 }

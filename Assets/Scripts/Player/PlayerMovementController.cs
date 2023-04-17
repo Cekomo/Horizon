@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Player
@@ -48,8 +47,9 @@ namespace Player
 
         private void FixedUpdate()
         {
-            var currentVelocity = (X_movementUnitVector * transform.right + Z_movementUnitVector *
-                transform.forward) * moveSpeed;
+            var pTransform = transform;
+            var currentVelocity = (X_movementUnitVector / 3 * pTransform.right + Z_movementUnitVector *
+                pTransform.forward) * moveSpeed;
             _rbPlayer.velocity = currentVelocity;
 
             if (_isJumpAvailable && IsPlayerGrounded())
@@ -69,11 +69,5 @@ namespace Player
             PlayerAnimator.SetBool(IsGrounded, isGrounded);
             return isGrounded;
         }
-        
-        private float GetRotationOffset()
-        {
-            return Quaternion.Angle(Quaternion.identity, transform.rotation);
-        }
-
     }
 }

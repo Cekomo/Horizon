@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 4
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -656,7 +656,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 338582253}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.06, y: 0.5, z: 0}
+  m_LocalPosition: {x: -5.06, y: 2.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1084,7 +1084,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760288789}
-  m_LocalRotation: {x: 0.14252953, y: -0.015108016, z: 0.0023678828, w: 0.9896724}
+  m_LocalRotation: {x: 0.14252952, y: -0.015108002, z: 0.002367881, w: 0.9896725}
   m_LocalPosition: {x: 0.03975579, y: -1.4535687, z: 3.7439058}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1169,7 +1169,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1207651006}
-  m_LocalRotation: {x: -0.03149433, y: -0.00040127337, z: -0.000007652183, w: 0.99950385}
+  m_LocalRotation: {x: -0.031494353, y: -0.00040126964, z: -0.000007652066, w: 0.99950385}
   m_LocalPosition: {x: 0.0010436177, y: -1.4535762, z: 3.743298}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1254,8 +1254,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1284500139}
-  m_LocalRotation: {x: 0.14072593, y: -0.15737739, z: 0.024665797, w: 0.977149}
-  m_LocalPosition: {x: 0.40888762, y: -1.452756, z: 3.8092701}
+  m_LocalRotation: {x: 0.14072591, y: -0.1573773, z: 0.02466579, w: 0.977149}
+  m_LocalPosition: {x: 0.40888745, y: -1.452756, z: 3.8092701}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
