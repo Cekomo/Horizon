@@ -53,8 +53,10 @@ namespace Player
             if (!IsPlayerMovable) return;
             
             var cTransform = PlayerRotationController.cameraTransform;
-            var currentVelocity = (X_movementUnitVector * cTransform.right + Z_movementUnitVector *
-                cTransform.forward) * moveSpeed;
+            var cameraForward = new Vector3(cTransform.forward.x, 0, cTransform.forward.z).normalized;
+            var cameraRight = new Vector3(cTransform.right.x, 0, cTransform.right.z).normalized;
+            var currentVelocity = (X_movementUnitVector * cameraRight + Z_movementUnitVector *
+                cameraForward) * moveSpeed;
             _rbPlayer.velocity = currentVelocity;
 
             if (_isJumpAvailable && IsPlayerGrounded())
