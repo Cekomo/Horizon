@@ -57,7 +57,9 @@ namespace Player
             var cameraRight = new Vector3(cTransform.right.x, 0, cTransform.right.z).normalized;
             var currentVelocity = (X_movementUnitVector * cameraRight + Z_movementUnitVector *
                 cameraForward) * moveSpeed;
-            _rbPlayer.velocity = currentVelocity;
+            var oldVerticalVelocity = _rbPlayer.velocity.y;
+            _rbPlayer.velocity = new Vector3(currentVelocity.x, oldVerticalVelocity, currentVelocity.z);
+            
 
             if (_isJumpAvailable && IsPlayerGrounded())
             {
