@@ -20,8 +20,8 @@ namespace Player
         public static bool IsPlayerMovable { get; set; }
         
         private Vector3 moveDirection;
-        private float X_movementUnitVector;
-        private float Z_movementUnitVector;
+        public static float X_movementUnitVector;
+        public static float Z_movementUnitVector;
         private bool _isJumpAvailable;
 
         public LayerMask groundMask;
@@ -40,7 +40,6 @@ namespace Player
             Z_movementUnitVector = Input.GetAxis("Vertical");
             
             PlayerAnimator.SetBool(IsRunningForward, Mathf.Abs(Z_movementUnitVector) > 0.1f);
-            PlayerAnimator.SetBool(IsRunningSide, Mathf.Abs(X_movementUnitVector) > 0.1f);
             PlayerAnimator.SetBool(IsGrounded, IsPlayerGrounded());
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -52,7 +51,7 @@ namespace Player
             if (!IsPlayerMovable) return;
             
             var pTransform = transform;
-            var currentVelocity = (X_movementUnitVector / 3 * pTransform.right + Z_movementUnitVector *
+            var currentVelocity = (X_movementUnitVector * pTransform.right + Z_movementUnitVector *
                 pTransform.forward) * moveSpeed;
             _rbPlayer.velocity = currentVelocity;
 

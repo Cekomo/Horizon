@@ -1,46 +1,34 @@
+using System;
+using Cinemachine;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerRotationController : MonoBehaviour
     {
-        // [Range(1f, 10f)] [SerializeField] private float rotationSpeed = 1f;
-        
-        private bool isRotationLeft;
-        private bool isDirectionChangeable;
-        
-        private void Update()
-        {
-            GetPlayerRotation();
-            if (!Input.GetKey(KeyCode.W)) return;
-            RotatePlayerHorizontally();
-        }
+        [SerializeField] private CinemachineVirtualCamera virtualCamera;
+        private Vector3 _cameraRotationVector;
 
-        private void GetPlayerRotation()
+        private void FixedUpdate()
         {
-            if (!(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))) return;
-                
-            isDirectionChangeable = true;
+            var zMovementUnitVector = PlayerMovementController.Z_movementUnitVector;
+            var xMovementUnitVector = PlayerMovementController.X_movementUnitVector;
             
-            if (Input.GetKey(KeyCode.D))
-                isRotationLeft = false;
-            else if (Input.GetKey(KeyCode.A))
-                isRotationLeft = true;
+            if (zMovementUnitVector != 0f || xMovementUnitVector != 0f)
+            {
+                // Calculate the desired player rotation based on camera rotation and input
+                var cameraRotation = Quaternion.Euler(0, _cameraRotationVector.y, 0);
+                var playerRotationVector = cameraRotation * new Vector3(xMovementUnitVector, 0, zMovementUnitVector);
+                var playerRotation = Quaternion.LookRotation(playerRotationVector);
+
+                // Apply the desired player rotation
+                transform.rotation = playerRotation;
+            }
         }
-        
-        private void RotatePlayerHorizontally()
+
+        private void LateUpdate()
         {
-            if (!isDirectionChangeable) return;
-
-            if (isRotationLeft)
-                transform.Rotate(Vector3.up, -90.0f, Space.Self);
-            else
-                transform.Rotate(Vector3.up, 90.0f, Space.Self);
-
-            isDirectionChangeable = false;
-
-            // var horizontalRotation = Input.GetAxis("Mouse X") * rotationSpeed;
-            // transform.Rotate(Vector3.up, horizontalRotation);
+            _cameraRotationVector = virtualCamera.transform.eulerAngles;
         }
     }
 }
