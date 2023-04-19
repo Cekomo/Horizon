@@ -7,7 +7,14 @@ namespace Player
     public class PlayerRotationController : MonoBehaviour
     {
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
+        
         private Vector3 _cameraRotationVector;
+        public static Transform cameraTransform;
+
+        private void Start()
+        {
+            cameraTransform = virtualCamera.transform;
+        }
 
         private void FixedUpdate()
         {
@@ -28,7 +35,8 @@ namespace Player
 
         private void LateUpdate()
         {
-            _cameraRotationVector = virtualCamera.transform.eulerAngles;
+            cameraTransform = virtualCamera.transform;
+            _cameraRotationVector = cameraTransform.eulerAngles;
         }
     }
 }

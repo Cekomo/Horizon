@@ -38,8 +38,10 @@ namespace Player
         {
             X_movementUnitVector = Input.GetAxis("Horizontal");
             Z_movementUnitVector = Input.GetAxis("Vertical");
-            
-            PlayerAnimator.SetBool(IsRunningForward, Mathf.Abs(Z_movementUnitVector) > 0.1f);
+
+            var isPlayerMoving = Mathf.Abs(Z_movementUnitVector) > 0.1f || Mathf.Abs(X_movementUnitVector) > 0.1f;
+            PlayerAnimator.SetBool(IsRunningForward, isPlayerMoving);
+            // PlayerAnimator.SetBool(IsRunningForward, Mathf.Abs(X_movementUnitVector) > 0.1f);
             PlayerAnimator.SetBool(IsGrounded, IsPlayerGrounded());
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -50,9 +52,9 @@ namespace Player
         {
             if (!IsPlayerMovable) return;
             
-            var pTransform = transform;
-            var currentVelocity = (X_movementUnitVector * pTransform.right + Z_movementUnitVector *
-                pTransform.forward) * moveSpeed;
+            var cTransform = PlayerRotationController.cameraTransform;
+            var currentVelocity = (X_movementUnitVector * cTransform.right + Z_movementUnitVector *
+                cTransform.forward) * moveSpeed;
             _rbPlayer.velocity = currentVelocity;
 
             if (_isJumpAvailable && IsPlayerGrounded())
