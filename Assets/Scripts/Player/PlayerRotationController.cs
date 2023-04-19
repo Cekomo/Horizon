@@ -18,6 +18,8 @@ namespace Player
 
         private void FixedUpdate()
         {
+            if (!PlayerMovementController.IsPlayerMovable) return;
+            
             var zMovementUnitVector = PlayerMovementController.Z_movementUnitVector;
             var xMovementUnitVector = PlayerMovementController.X_movementUnitVector;
             
