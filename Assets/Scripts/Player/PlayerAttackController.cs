@@ -10,9 +10,8 @@ namespace Player
 
         private static readonly int Attack = Animator.StringToHash("Attack");
         
-        private readonly float maceSwingingPeriod = 2.5f; // fix its period, this is too short
+        private readonly float maceSwingingPeriod = 2.5f; 
 
-        // Update is called once per frame
         void Update()
         {
             if (!Input.GetMouseButtonDown(0) || !PlayerMovementController.IsPlayerMovable) return;

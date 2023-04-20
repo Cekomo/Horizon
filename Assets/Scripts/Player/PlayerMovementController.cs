@@ -14,7 +14,6 @@ namespace Player
         
         private static readonly int JumpTrigger = Animator.StringToHash("Jump");
         private static readonly int IsRunningForward = Animator.StringToHash("IsRunningForward");
-        private static readonly int IsRunningSide = Animator.StringToHash("IsRunningSide");
         private static readonly int IsGrounded = Animator.StringToHash("IsGrounded");
         
         public static bool IsPlayerMovable { get; set; }
@@ -25,7 +24,6 @@ namespace Player
         private bool _isJumpAvailable;
 
         public LayerMask groundMask;
-        // [Range(0.05f, 3f)] [SerializeField] 
         private float _groundCheckDistance = 0.1f;
 
         private void Start()
@@ -41,7 +39,6 @@ namespace Player
 
             var isPlayerMoving = Mathf.Abs(Z_movementUnitVector) > 0.1f || Mathf.Abs(X_movementUnitVector) > 0.1f;
             PlayerAnimator.SetBool(IsRunningForward, isPlayerMoving);
-            // PlayerAnimator.SetBool(IsRunningForward, Mathf.Abs(X_movementUnitVector) > 0.1f);
             PlayerAnimator.SetBool(IsGrounded, IsPlayerGrounded());
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -55,19 +52,27 @@ namespace Player
             var cTransform = PlayerRotationController.cameraTransform;
             var cameraForward = new Vector3(cTransform.forward.x, 0, cTransform.forward.z).normalized;
             var cameraRight = new Vector3(cTransform.right.x, 0, cTransform.right.z).normalized;
+            
+            Move(cameraRight, cameraForward);
+            
+            if (_isJumpAvailable && IsPlayerGrounded())
+                Jump();
+        }
+
+        private void Move(Vector3 cameraRight, Vector3 cameraForward)
+        {
             var currentVelocity = (X_movementUnitVector * cameraRight + Z_movementUnitVector *
                 cameraForward) * moveSpeed;
             var oldVerticalVelocity = _rbPlayer.velocity.y;
             _rbPlayer.velocity = new Vector3(currentVelocity.x, oldVerticalVelocity, currentVelocity.z);
-            
-
-            if (_isJumpAvailable && IsPlayerGrounded())
-            {
-                PlayerAnimator.SetTrigger(JumpTrigger);
-                PlayerAnimator.SetBool(IsGrounded, false);
-                _rbPlayer.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                _isJumpAvailable = false;
-            }
+        }
+        
+        private void Jump()
+        {
+            PlayerAnimator.SetTrigger(JumpTrigger);
+            PlayerAnimator.SetBool(IsGrounded, false);
+            _rbPlayer.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            _isJumpAvailable = false;
         }
 
         private bool IsPlayerGrounded()
