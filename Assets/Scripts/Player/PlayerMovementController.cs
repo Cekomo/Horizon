@@ -24,7 +24,7 @@ namespace Player
         private bool _isJumpAvailable;
 
         public LayerMask groundMask;
-        private float _groundCheckDistance = 0.1f;
+        private float _groundCheckDistance = 0.3f;
 
         private void Start()
         {
